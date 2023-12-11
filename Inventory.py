@@ -341,6 +341,7 @@ class InventoryPage:
         coffee_tree.configure(
             columns=(
                 "BillNumber",
+                "Total_Purchase",
                 "Date",
                 "CashierName",
                 "contact"
@@ -348,6 +349,7 @@ class InventoryPage:
         )
 
         coffee_tree.heading("BillNumber", text="BILL NUMBER", anchor=N)
+        coffee_tree.heading("Total_Purchase", text="Total_Purchase", anchor=N)
         coffee_tree.heading("Date", text="DATE", anchor=N)
         coffee_tree.heading("CashierName", text="CASHIER NAME", anchor=N)
         coffee_tree.heading("contact", text="CONTACT", anchor=N)
@@ -358,7 +360,7 @@ class InventoryPage:
         coffee_tree.column("#2", stretch=NO, minwidth=0, width=150, anchor=N)
         coffee_tree.column("#3", stretch=NO, minwidth=0, width=352, anchor=N)
         coffee_tree.column("#4", stretch=NO, minwidth=0, width=110, anchor=N)
-        #coffee_tree.column("#5", stretch=NO, minwidth=0, width=50, anchor=N)
+        coffee_tree.column("#5", stretch=NO, minwidth=0, width=120, anchor=N)
         coffee_tree.bind("<ButtonRelease-1>", coffee_info)
         show_all()
 

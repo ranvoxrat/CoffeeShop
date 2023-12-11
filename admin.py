@@ -49,6 +49,8 @@ class SecondPage:
         cust_new_bill = StringVar()
         cust_search_bill = StringVar()
         bill_date = StringVar()
+        total_purchase= StringVar()
+        input_quantity=StringVar()
 
         with sqlite3.connect("./Database/CoffeeShop.db") as db:
             cur = db.cursor()
@@ -227,7 +229,8 @@ class SecondPage:
                 coffeeImg = Label(coverFrame2, image=photo, bg='#ffffff')
                 coffeeImg.image = photo
                 coffeeImg.place(x=100, y=35)
-
+                
+                quan_id=StringVar()
                 coffee = StringVar()
                 type = StringVar()
                 discount = StringVar()
@@ -236,14 +239,14 @@ class SecondPage:
                 coffee_id = StringVar()
 
                 # ID NAME AND ENTRY
-                idLabel = Label(coverFrame3, text="#", bg='#ffffff', font=("yu gothic ui", 13, "bold"))
-                idLabel.place(x=5, y=41)
-
-                idName_entry = Entry(coverFrame3, highlightthickness=2, relief=FLAT, bg="#ffffff", fg="#6b6a69",
-                                         font=("", 11, 'bold'), textvariable=coffee_id,state="readonly")
-                idName_entry.place(x=22, y=44, width=40, height=24)
-                idName_entry.config(highlightbackground="#6b6a69", highlightcolor="#ff6c38")
-
+                # idLabel = Label(coverFrame3, text="#", bg='#ffffff', font=("yu gothic ui", 13, "bold"))
+                # idLabel.place(x=5, y=41)
+                
+                # idName_entry = Entry(coverFrame3, highlightthickness=2, relief=FLAT, bg="#ffffff", fg="#6b6a69",
+                #                          font=("", 11, 'bold'), textvariable=coffee_id,state="readonly")
+                # idName_entry.place(x=22, y=44, width=40, height=24)
+                # idName_entry.config(highlightbackground="#6b6a69", highlightcolor="#ff6c38")
+                
                 # COFFEE NAME AND ENTRY
                 coffeeLabel = Label(coverFrame3, text="COFFEE", bg='#ffffff', font=("yu gothic ui", 12, "bold"))
                 coffeeLabel.place(x=90, y=40)
@@ -370,7 +373,6 @@ class SecondPage:
                     conn.commit()
                     conn.close()
                     show_all()
-                    # self.Reset()
                     messagebox.showinfo("Success", "Coffee Record updated Successfully")
 
                 self.button3 = Button(coverFrame3)
@@ -825,11 +827,20 @@ class SecondPage:
                 self.clock.configure(foreground="#000000")
                 self.clock.configure(background="#ffffff")
 
+                
+
                 self.quantity = Label(biller)
                 self.quantity.place(x=45, y=484)
                 self.quantity.configure(font="-family {Poppins Light} -size 11")
                 self.quantity.configure(foreground="#000000")
                 self.quantity.configure(text="Quantity")
+                self.quantity.configure(background="#ffffff")
+
+                self.quantity = Label(biller)
+                self.quantity.place(x=45, y=535)
+                self.quantity.configure(font="-family {Poppins Light} -size 11")
+                self.quantity.configure(foreground="#000000")
+                self.quantity.configure(text="Total Purchase")
                 self.quantity.configure(background="#ffffff")
 
                 self.coffee_name = Label(biller)
@@ -866,19 +877,20 @@ class SecondPage:
                 self.cashier_name.configure(foreground="#000000")
                 self.cashier_name.configure(text="Cashier Fullname")
                 self.cashier_name.configure(background="#ffffff")
-
+                
+                #Cashier name
                 self.entry1 = ttk.Entry(biller)
                 self.entry1.place(relx=0.035, rely=0.300, width=477, height=24)
                 self.entry1.configure(font="-family {Poppins} -size 12")
                 self.entry1.configure(textvariable=cust_name)
-
+                #Company Number
                 self.entry2 = ttk.Entry(biller)
                 self.entry2.place(relx=0.035, rely=0.368, width=477, height=24)
                 self.entry2.configure(font="-family {Poppins} -size 10")
                 self.entry2.configure(textvariable=cust_num)
                 self.companyNumber_txt = str(8798236784)
                 self.entry2.insert(0, self.companyNumber_txt)
-
+                #Search bar
                 self.entry3 = Entry(biller, highlightthickness=2)
                 self.entry3.place(relx=0.402, rely=0.019, width=350, height=29)
                 self.entry3.configure(font="-family {Poppins} -size 11 -weight normal")
@@ -889,11 +901,6 @@ class SecondPage:
                 self.entry3.insert(0, self.search_txt)
                 self.entry3.bind("<1>", self.clear_search)
 
-                # searchIcon = Image.open('images\\search.png')
-                # photo = ImageTk.PhotoImage(searchIcon)
-                # search = Label(biller, image=photo, bg='#f6f6f9')
-                # search.image = photo
-                # search.place(relx=0.378, rely=0.019)
 
                 self.button2 = Button(biller)
                 self.button2.place(relx=0.660, rely=0.019, width=76, height=29)
@@ -999,39 +1006,45 @@ class SecondPage:
                 for i in range(len(result1)):
                     if (result1[i][0] not in cat):
                         cat.append(result1[i][0])
-
+                #Bill Type
                 self.combo1.configure(values=cat)
                 self.combo1.configure(state="readonly")
                 self.combo1.configure(font="-family {Poppins SemiBold} -size 9")
                 self.combo1.option_add("*TCombobox*Listbox.font", text_font)
                 self.combo1.option_add("*TCombobox*Listbox.selectBackground", "#fd6a36")
                 #self.combo1.bind('<1>', self.entry1)
-
+                #Discount
                 self.combo2 = ttk.Combobox(biller)
                 self.combo2.place(relx=0.035, rely=0.520, width=477, height=26)
                 self.combo2.configure(font="-family {Poppins SemiBold} -size 9")
                 self.combo2.option_add("*TCombobox*Listbox.font", text_font)
                 self.combo2.configure(state="disabled")
-
+                #Coffee Name
                 self.combo3 = ttk.Combobox(biller)
                 self.combo3.place(relx=0.035, rely=0.590, width=477, height=26)
                 self.combo3.configure(state="disabled")
                 self.combo3.configure(font="-family {Poppins SemiBold} -size 9")
                 self.combo3.option_add("*TCombobox*Listbox.font", text_font)
-
-                self.entry4 = ttk.Entry(biller)
+                #Quantity
+                self.entry4 = ttk.Entry(biller,textvariable=input_quantity)
                 self.entry4.place(relx=0.035, rely=0.660, width=477, height=26)
                 self.entry4.configure(font="-family {Poppins SemiBold} -size 9")
                 self.entry4.configure(foreground="#108cff")
                 self.entry4.configure(state="disabled")
+                #Total Purchase
+                self.entry5 = ttk.Entry(biller,textvariable=total_purchase)
+                self.entry5.place(relx=0.035, rely=0.730, width=477, height=26)
+                self.entry5.configure(font="-family {Poppins SemiBold} -size 9")
+                self.entry5.configure(foreground="#108cff")
+                self.entry5.configure(state="disabled")
 
                 self.Scrolledtext1 = tkst.ScrolledText(top)
                 self.Scrolledtext1.place(relx=0.439, rely=0.306, width=450, height=490)
                 self.Scrolledtext1.configure(borderwidth=0)
                 self.Scrolledtext1.configure(font="-family {Podkova} -size 9")
                 self.Scrolledtext1.configure(state="normal")
-                head = "\n\n\t\t  COFFEE SHOP\n" \
-                       "\t\t C12 TEMA GHANA\n\n\t\t THANK YOU FOR CHOOSING OUR COFFEE\n" \
+                head = "\n\n\t\tFeliciano COFFEE SHOP\n" \
+                       "\t\t Brgy. Muzon\n\n\t\t THANK YOU FOR CHOOSING OUR COFFEE\n" \
                        "\t\t WE HOPE TO SEE YOU NEXT TIME\n\n\n" + "\tCOFFEE\t  -----  \tQUANTITY\t  -----  \tPRICE ( $ )\n"
                 self.Scrolledtext1.insert('insert', head)
 
@@ -1080,7 +1093,7 @@ class SecondPage:
             def show_qty(self, Event):
                 self.entry4.configure(state="normal")
                 self.qty_label = Label(biller)
-                self.qty_label.place(relx=0.033, rely=0.694, width=82, height=26)
+                self.qty_label.place(relx=0.328, rely=0.625, width=82, height=25)
                 self.qty_label.configure(font="-family {Poppins SemiBold} -size 9")
                 self.qty_label.configure(anchor="w")
 
@@ -1088,9 +1101,37 @@ class SecondPage:
                 find_qty = "SELECT in_stock FROM Coffee_Category WHERE coffee_name = ?"
                 cur.execute(find_qty, [product_name])
                 results = cur.fetchone()
+
                 self.qty_label.configure(text="In Stock: {}".format(results[0]))
                 self.qty_label.configure(background="#ffffff")
                 self.qty_label.configure(foreground="#333333")
+                
+               # Bind the quantity_prod function to the <FocusOut> event
+                self.entry4.bind("<KeyRelease>", self.quantity_prod)
+                self.entry5.configure(state="disabled")
+
+                
+            def quantity_prod(self, event):
+                try:
+                    # Get the quantity entered by the user
+                    quantity = int(self.entry4.get())
+                    
+                    product_name = self.combo3.get()
+                    find_price = "SELECT coffee_price FROM Coffee_Category WHERE coffee_name = ?"
+                    cur.execute(find_price, [product_name])
+                    results = cur.fetchone()
+
+                    # Calculate the total purchase based on quantity and price
+                    total = quantity * results[0]
+
+                    # Set the total purchase in the entry5 widget
+                    self.entry5.configure(state="normal")
+                    self.entry5.delete(0, 'end')  # Clear the entry before setting the new value
+                    self.entry5.insert(0, format(total))
+                    self.entry5.configure(state="disabled")
+                except ValueError:
+                    messagebox.showerror("Error", "Please enter a valid quantity.")
+                   
 
             cart = Cart()
 
@@ -1298,7 +1339,7 @@ class SecondPage:
                             with sqlite3.connect("./Database/CoffeeShop.db") as db:
                                 cur = db.cursor()
                             insert = (
-                                "INSERT INTO Inventory(bill_number, date, cashier_name, contact, bill_details) VALUES(?,?,?,?,?)"
+                                "INSERT INTO Inventory(bill_number, date, cashier_name, contact, bill_details,Total_Purchase) VALUES(?,?,?,?,?,?)"
                             )
                             cur.execute(insert, [cust_new_bill.get(), bill_date.get(), cust_name.get(), cust_num.get(), self.Scrolledtext1.get('1.0', END)])
                             db.commit()
@@ -1340,7 +1381,7 @@ class SecondPage:
                 self.cart.remove_items()
                 self.state = 1
                 head = "\n\n\t\t  COFFEE SHOP\n" \
-                       "\t\t C12 TEMA GHANA\n\n\t\t THANK YOU FOR CHOOSING OUR COFFEE\n" \
+                       "\t\t Brgy. Muzon\n\n\t\t THANK YOU FOR CHOOSING OUR COFFEE\n" \
                        "\t\t WE HOPE TO SEE YOU NEXT TIME\n\n\n" + "\tCOFFEE\t  -----  \tQUANTITY\t  -----  \tPRICE ( $ )\n"
                 self.Scrolledtext1.insert('insert', head)
 

@@ -921,7 +921,7 @@ class SecondPage:
                 self.Scrolledtext1.configure(font="-family {Podkova} -size 9")
                 self.Scrolledtext1.configure(state="normal")
                 head = "\n\n\t\t  COFFEE SHOP\n" \
-                       "\t\t C12 TEMA GHANA\n\n\t\t THANK YOU FOR CHOOSING OUR COFFEE\n" \
+                       "\t\t Brgy. Muzon\n\n\t\t THANK YOU FOR CHOOSING OUR COFFEE\n" \
                        "\t\t WE HOPE TO SEE YOU NEXT TIME\n\n\n" + "\tCOFFEE\t  -----  \tQUANTITY\t  -----  \tPRICE ( $ )\n"
                 self.Scrolledtext1.insert('insert', head)
 
@@ -1230,7 +1230,7 @@ class SecondPage:
                 self.cart.remove_items()
                 self.state = 1
                 head = "\n\n\t\t  COFFEE SHOP\n" \
-                       "\t\t C12 TEMA GHANA\n\n\t\t THANK YOU FOR CHOOSING OUR COFFEE\n" \
+                       "\t\t Brgy. Muzon\n\n\t\t THANK YOU FOR CHOOSING OUR COFFEE\n" \
                        "\t\t WE HOPE TO SEE YOU NEXT TIME\n\n\n" + "\tCOFFEE\t  -----  \tQUANTITY\t  -----  \tPRICE ( $ )\n"
                 self.Scrolledtext1.insert('insert', head)
 
